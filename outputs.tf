@@ -9,3 +9,8 @@ output "compartment-name" {
 output "compartment-id" {
   value = oci_identity_compartment.terraform_compartment.id
 }
+
+output "vcp_id" {
+  description = "OCID of the VCN that is created"
+  value = module.vcn.vcn_id
+}
