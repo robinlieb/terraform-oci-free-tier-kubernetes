@@ -1,5 +1,5 @@
 resource "oci_core_instance" "ubuntu_instance" {
-    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
+    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
     compartment_id = oci_identity_compartment.terraform_compartment.id
     shape = var.instance_shape
 
