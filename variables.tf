@@ -12,3 +12,6 @@ variable "fingerprint" {
 
 variable "region" {
 }
+
+variable "compute_pub_ssh_key" {
+}
