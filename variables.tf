@@ -30,3 +30,8 @@ variable "linux_os_version" {
     description = "Operating system version for all Linux instances"
     default     = "22.04"
 }
+
+variable "instance_count" {
+    description = "Number of instances which should be created"
+    default     = 2
+}

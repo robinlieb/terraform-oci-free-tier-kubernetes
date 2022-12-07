@@ -1,4 +1,5 @@
 resource "oci_core_instance" "ubuntu_instance" {
+    count = var.instance_count
     availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
     compartment_id = oci_identity_compartment.terraform_compartment.id
     shape = var.instance_shape
@@ -13,7 +14,7 @@ resource "oci_core_instance" "ubuntu_instance" {
         source_type = "image"
     }
 
-    display_name = "node1"
+    display_name = "node${count.index}"
     create_vnic_details {
         assign_public_ip = true
         subnet_id = oci_core_subnet.vcn_public_subnet.id
