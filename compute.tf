@@ -18,6 +18,7 @@ resource "oci_core_instance" "ubuntu_instance" {
     create_vnic_details {
         assign_public_ip = true
         subnet_id = oci_core_subnet.vcn_public_subnet.id
+        private_ip = "10.0.0.${10 + count.index}"
     }
     metadata = {
         ssh_authorized_keys = var.compute_pub_ssh_key
