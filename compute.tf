@@ -5,8 +5,8 @@ resource "oci_core_instance" "ubuntu_instance" {
     shape = var.instance_shape
 
     shape_config {
-        ocpus = 2
-        memory_in_gbs = 12
+        ocpus = var.instance_ocpus
+        memory_in_gbs = var.instance_memory
     }
 
     source_details {

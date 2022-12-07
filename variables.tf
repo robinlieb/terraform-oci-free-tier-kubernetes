@@ -31,6 +31,16 @@ variable "linux_os_version" {
     default     = "22.04"
 }
 
+variable "instance_ocpus" {
+    description = "Number of OCPUs available to the instance"
+    default     = 2
+}
+
+variable "instance_memory" {
+    description = "Amount of memory available to the instance, in gigabytes"
+    default     = 12
+}
+
 variable "instance_count" {
     description = "Number of instances which should be created"
     default     = 2
