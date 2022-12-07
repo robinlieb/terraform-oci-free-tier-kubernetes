@@ -33,15 +33,15 @@ variable "linux_os_version" {
 
 variable "instance_ocpus" {
     description = "Number of OCPUs available to the instance"
-    default     = 2
+    default     = 1
 }
 
 variable "instance_memory" {
     description = "Amount of memory available to the instance, in gigabytes"
-    default     = 12
+    default     = 6
 }
 
 variable "instance_count" {
     description = "Number of instances which should be created"
-    default     = 2
+    default     = 4
 }
