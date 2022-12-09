@@ -11,7 +11,7 @@ apt:
       source: "deb  http://apt.kubernetes.io/  kubernetes-xenial  main"
       keyserver: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     docker.list:
-      source: "deb [arch=$(dpkg --print-architecture) https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
       keyserver: https://download.docker.com/linux/ubuntu/gpg
 
 packages:
