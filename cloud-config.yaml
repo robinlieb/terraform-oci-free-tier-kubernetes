@@ -1,4 +1,5 @@
 #cloud-config
 
 runcmd:
- - touch /home/ubuntu/test.txt
+  - echo $HOME >> /home/ubuntu/test.txt
+  - whoami >> /home/ubuntu/test.txt
