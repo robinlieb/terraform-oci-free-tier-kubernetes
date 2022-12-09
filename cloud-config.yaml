@@ -1,5 +1,11 @@
 #cloud-config
 
+package_update: true
+package_upgrade: true
+
+packages:
+  - jq
+
 runcmd:
   - echo $HOME >> /home/ubuntu/test.txt
   - whoami >> /home/ubuntu/test.txt
