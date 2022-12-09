@@ -1,0 +1,4 @@
+#cloud-config
+
+runcmd:
+ - touch /home/ubuntu/test.txt
