@@ -24,6 +24,25 @@ resource "oci_core_instance" "ubuntu_instance" {
     ssh_authorized_keys = var.compute_pub_ssh_key
   }
   preserve_boot_volume = false
+
+  connection {
+    type = "ssh"
+    host = "${self.public_ip}"
+    user = "ubuntu"
+    private_key = var.compute_priv_ssh_key
+    
+  }
+
+  provisioner "file" {
+    source = "provision.sh"
+    destination = "/home/ubuntu/provision.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo $HOME >> /home/ubuntu/test.txt",
+    ]
+  }
 }
 
 data "oci_core_images" "instance_images" {

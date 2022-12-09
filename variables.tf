@@ -16,6 +16,9 @@ variable "region" {
 variable "compute_pub_ssh_key" {
 }
 
+variable "compute_priv_ssh_key" {
+}
+
 variable "instance_shape" {
   description = "Instance Shape"
   default     = "VM.Standard.A1.Flex"
