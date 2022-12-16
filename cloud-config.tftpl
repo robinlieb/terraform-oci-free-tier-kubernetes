@@ -1,0 +1,44 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+
+apt:
+  preserve_sources_list: false
+  add_apt_repo_match: ^[\w-]+:\w
+  sources:
+    kubernetes.list:
+      source: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+      keyid: 7EA0A9C3F273FCD8
+    docker.list:
+      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
+      keyid: B53DC80D13EDEF05
+
+packages:
+  - curl
+  - apt-transport-https
+  - vim
+  - git
+  - gnupg2
+  - software-properties-common
+  - ca-certificates
+  - uidmap
+  - jq
+  - containerd
+  - [kubeadm, 1.24.1-00]
+  - [kubelet, 1.24.1-00]
+  - [kubectl, 1.24.1-00]
+
+runcmd:
+  - echo $HOME >> /home/ubuntu/test.txt
+  - whoami >> /home/ubuntu/test.txt
+  - swapoff -a
+  - sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+  - modprobe overlay
+  - modprobe br_netfilter
+  %{if node == 0 }
+  - echo cp >> /home/ubuntu/node.txt
+  %{ else }
+  - echo worker >> /home/ubuntu/node.txt
+  %{ endif }
+  - echo ${node} >> /home/ubuntu/node.txt

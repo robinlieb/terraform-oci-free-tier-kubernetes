@@ -22,7 +22,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
   metadata = {
     ssh_authorized_keys = var.compute_pub_ssh_key
-    user_data           = filebase64("./cloud-config.yaml")
+    user_data           = data.cloudinit_config.config[count.index].rendered
   }
   preserve_boot_volume = false
 }
