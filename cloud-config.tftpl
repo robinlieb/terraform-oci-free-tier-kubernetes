@@ -29,6 +29,15 @@ packages:
   - [kubelet, 1.24.1-00]
   - [kubectl, 1.24.1-00]
 
+write_files:
+  - path: /etc/sysctl.d/kubernetes.conf
+    owner: root:root
+    permission: 0600
+    content: |
+      net.bridge.bridge-nf-call-ip6tables = 1
+      net.bridge.bridge-nf-call-iptables = 1
+      net.ipv4.ip_forward = 1
+
 runcmd:
   - echo $HOME >> /home/ubuntu/test.txt
   - whoami >> /home/ubuntu/test.txt
