@@ -38,7 +38,7 @@ write_files:
       net.bridge.bridge-nf-call-iptables = 1
       net.ipv4.ip_forward = 1
   %{if node == 0 }
-  - path: kubeadm-config.yaml
+  - path: /etc/kubeadm-config.yaml
     owner: root:root
     permission: 0600
     content: |
@@ -76,7 +76,7 @@ runcmd:
   - echo "10.0.0.11 worker1" >> /etc/hosts
   - echo "10.0.0.12 worker2" >> /etc/hosts
   - echo "10.0.0.13 worker3" >> /etc/hosts
-  - kubeadm init --config=kubeadm-config.yaml --upload-certs | tee kubeadm-init.out
+  - kubeadm init --config=/etc/kubeadm-config.yaml --upload-certs | tee kubeadm-init.out
   - mkdir -p $HOME/.kube
   - cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   - chown $(id -u):$(id -g) $HOME/.kube/config
