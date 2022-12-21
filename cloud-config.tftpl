@@ -25,9 +25,9 @@ packages:
   - uidmap
   - jq
   - containerd
-  - [kubeadm, 1.24.1-00]
-  - [kubelet, 1.24.1-00]
-  - [kubectl, 1.24.1-00]
+  - kubeadm
+  - kubelet
+  - kubectl
 
 write_files:
   - path: /etc/sysctl.d/kubernetes.conf
@@ -44,7 +44,6 @@ write_files:
     content: |
       apiVersion: kubeadm.k8s.io/v1beta3
       kind: ClusterConfiguration
-      kubernetesVersion: 1.24.1
       controlPlaneEndpoint: "cp:6443"
       networking:
         podSubnet: 192.168.0.0/16
