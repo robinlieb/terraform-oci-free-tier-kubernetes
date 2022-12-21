@@ -69,6 +69,9 @@ runcmd:
   - node_ip=$(ip -o -4 addr list enp0s3 | awk '{print $4}' | cut -d/ -f1)
   - echo KUBELET_EXTRA_ARGS="--node-ip $node_ip" | tee /etc/default/kubelet
   - iptables -F
+  - iptables -P INPUT ACCEPT
+  - iptables -P OUTPUT ACCEPT
+  - iptables -P FORWARD ACCEPT
   - netfilter-persistent save
   %{if node == 0 }
   - echo cp >> /home/ubuntu/node.txt
