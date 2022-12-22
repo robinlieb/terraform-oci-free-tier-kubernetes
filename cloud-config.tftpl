@@ -11,7 +11,7 @@ apt:
       source: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
       keyid: 7EA0A9C3F273FCD8
     docker.list:
-      source: "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
+      source: "deb [arch=arm64] https://download.docker.com/linux/ubuntu jammy stable"
       keyid: B53DC80D13EDEF05
 
 packages:
@@ -24,7 +24,7 @@ packages:
   - ca-certificates
   - uidmap
   - jq
-  - containerd
+  - containerd.io
   - kubeadm
   - kubelet
   - kubectl
@@ -53,6 +53,10 @@ write_files:
       localAPIEndpoint:
         advertiseAddress: "10.0.0.10"
         bindPort: 6443
+      ---
+      apiVersion: kubelet.config.k8s.io/v1beta1
+      kind: KubeletConfiguration
+      cgroupDriver: systemd
   %{ endif }
 
 runcmd:
@@ -75,6 +79,9 @@ runcmd:
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10257 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10259 -j ACCEPT
   - netfilter-persistent save
+  - containerd config default > /etc/containerd/config.toml
+  - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+  - systemctl restart containerd
   %{if node == 0 }
   - echo cp >> /home/ubuntu/node.txt
   - curl https://docs.projectcalico.org/manifests/calico.yaml -O
