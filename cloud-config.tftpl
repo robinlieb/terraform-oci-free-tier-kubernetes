@@ -79,7 +79,6 @@ runcmd:
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
   - systemctl restart containerd
   %{if node == 0 }
-  - curl https://docs.projectcalico.org/manifests/calico.yaml -O
   - echo "10.0.0.10 cp" >> /etc/hosts
   - echo "10.0.0.11 worker1" >> /etc/hosts
   - echo "10.0.0.12 worker2" >> /etc/hosts
@@ -88,11 +87,12 @@ runcmd:
   - mkdir -p /root/.kube
   - cp -i /etc/kubernetes/admin.conf /root/.kube/config
   - chown $(id -u):$(id -g) /root/.kube/config
-  - kubectl apply -f calico.yaml
   - mkdir -p /home/ubuntu/.kube
   - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
   - chown $(id -u ubuntu):$(id -g ubuntu) /home/ubuntu/.kube/config
   - kubeadm token create ${token}
+  - curl https://docs.projectcalico.org/manifests/calico.yaml -O
+  - kubectl apply -f calico.yaml
   %{ else }
   - echo "10.0.0.10 cp" >> /etc/hosts
   - kubeadm join --token ${token} --discovery-token-unsafe-skip-ca-verification cp:6443
