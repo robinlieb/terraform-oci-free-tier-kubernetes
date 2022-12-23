@@ -84,9 +84,7 @@ runcmd:
   - echo "10.0.0.12 worker2" >> /etc/hosts
   - echo "10.0.0.13 worker3" >> /etc/hosts
   - kubeadm init --config=/etc/kubeadm-config.yaml --upload-certs --ignore-preflight-errors=NumCPU
-  - mkdir -p /root/.kube
-  - cp -i /etc/kubernetes/admin.conf /root/.kube/config
-  - chown $(id -u):$(id -g) /root/.kube/config
+  - export KUBECONFIG=/etc/kubernetes/admin.conf
   - mkdir -p /home/ubuntu/.kube
   - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
   - chown $(id -u ubuntu):$(id -g ubuntu) /home/ubuntu/.kube/config
