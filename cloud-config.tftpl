@@ -60,10 +60,6 @@ write_files:
   %{ endif }
 
 runcmd:
-  - echo $HOME >> /home/ubuntu/test.txt
-  - whoami >> /home/ubuntu/test.txt
-  - echo ${node} >> /home/ubuntu/node.txt
-  - echo ${token} >> /home/ubuntu/token.txt
   - swapoff -a
   - sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
   - modprobe overlay
@@ -83,7 +79,6 @@ runcmd:
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
   - systemctl restart containerd
   %{if node == 0 }
-  - echo cp >> /home/ubuntu/node.txt
   - curl https://docs.projectcalico.org/manifests/calico.yaml -O
   - echo "10.0.0.10 cp" >> /etc/hosts
   - echo "10.0.0.11 worker1" >> /etc/hosts
@@ -99,7 +94,6 @@ runcmd:
   - chown $(id -u ubuntu):$(id -g ubuntu) /home/ubuntu/.kube/config
   - kubeadm token create ${token}
   %{ else }
-  - echo worker >> /home/ubuntu/node.txt
   - echo "10.0.0.10 cp" >> /etc/hosts
   - kubeadm join --token ${token} --discovery-token-unsafe-skip-ca-verification cp:6443
   %{ endif }
