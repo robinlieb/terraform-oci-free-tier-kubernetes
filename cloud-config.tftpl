@@ -68,12 +68,14 @@ runcmd:
   - apt-mark hold kubelet kubeadm kubectl
   - node_ip=$(ip -o -4 addr list enp0s3 | awk '{print $4}' | cut -d/ -f1)
   - echo KUBELET_EXTRA_ARGS="--node-ip $node_ip" | tee /etc/default/kubelet
+  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 2379 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 2380 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 6443 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10250 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10257 -j ACCEPT
   - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10259 -j ACCEPT
+  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 30008 -j ACCEPT
   - netfilter-persistent save
   - containerd config default > /etc/containerd/config.toml
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
