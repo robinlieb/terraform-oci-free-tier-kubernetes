@@ -25,6 +25,19 @@ resource "oci_core_instance" "ubuntu_instance" {
     user_data           = data.cloudinit_config.config[count.index].rendered
   }
   preserve_boot_volume = false
+
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    host        = self.public_ip
+    private_key = var.ssh_private_key
+  }
+
+  provisioner "file" {
+    content     = self.id
+    destination = "/home/ubuntu/init.sh"
+  }
+
 }
 
 data "oci_core_images" "instance_images" {
