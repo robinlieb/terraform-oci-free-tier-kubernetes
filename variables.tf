@@ -13,7 +13,7 @@ variable "fingerprint" {
 variable "region" {
 }
 
-variable "compute_pub_ssh_key" {
+variable "ssh_public_key" {
 }
 
 variable "instance_shape" {

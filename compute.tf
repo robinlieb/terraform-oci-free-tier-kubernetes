@@ -21,7 +21,7 @@ resource "oci_core_instance" "ubuntu_instance" {
     private_ip       = "10.0.0.${10 + count.index}"
   }
   metadata = {
-    ssh_authorized_keys = var.compute_pub_ssh_key
+    ssh_authorized_keys = var.ssh_public_key
     user_data           = data.cloudinit_config.config[count.index].rendered
   }
   preserve_boot_volume = false
