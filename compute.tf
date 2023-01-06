@@ -34,8 +34,38 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
 
   provisioner "file" {
-    content     = self.id
-    destination = "/home/ubuntu/init.sh"
+    content = templatefile("${path.module}/scripts/init.sh",
+      {
+        instanceID = self.id,
+      }
+    )
+    destination = "/tmp/init.sh"
+  }
+
+  provisioner "file" {
+    content = templatefile("${path.module}/provider-config.tftpl",
+      {
+        region        = var.region,
+        tenancy       = var.tenancy_ocid,
+        user          = var.user_ocid,
+        key           = var.private_key,
+        fingerprint   = var.fingerprint,
+        compartment   = oci_identity_compartment.terraform_compartment.id,
+        vcn           = module.vcn.vcn_id,
+        subnet1       = oci_core_subnet.vcn_public_subnet.id,
+        subnet2       = oci_core_subnet.vcn_private_subnet.id,
+        securitylist1 = oci_core_security_list.public_security_list.id,
+        securitylist2 = oci_core_security_list.private_security_list.id,
+      }
+    )
+    destination = "/tmp/provider-config-template.yaml"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/init.sh",
+      "/tmp/init.sh",
+    ]
   }
 
 }

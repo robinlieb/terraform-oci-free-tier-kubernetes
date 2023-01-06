@@ -47,6 +47,9 @@ write_files:
       controlPlaneEndpoint: "cp:6443"
       networking:
         podSubnet: 192.168.0.0/16
+      controllerManager:
+        extraArgs:
+          cloud-provider: external
       ---
       apiVersion: kubeadm.k8s.io/v1beta3
       kind: InitConfiguration
@@ -67,15 +70,7 @@ runcmd:
   - sysctl --system
   - apt-mark hold kubelet kubeadm kubectl
   - node_ip=$(ip -o -4 addr list enp0s3 | awk '{print $4}' | cut -d/ -f1)
-  - echo KUBELET_EXTRA_ARGS="--node-ip $node_ip" | tee /etc/default/kubelet
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 2379 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 2380 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 6443 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10250 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10257 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 10259 -j ACCEPT
-  - iptables -I INPUT 6 -m state --state NEW -p tcp --dport 30008 -j ACCEPT
+  - iptables --flush
   - netfilter-persistent save
   - containerd config default > /etc/containerd/config.toml
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
@@ -93,6 +88,9 @@ runcmd:
   - kubeadm token create ${token}
   - curl https://docs.projectcalico.org/manifests/calico.yaml -O
   - kubectl apply -f calico.yaml
+  - kubectl create secret generic oci-cloud-controller-manager -n kube-system --from-file=cloud-provider.yaml=/tmp/provider-config-template.yaml
+  - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager-rbac.yaml
+  - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager.yaml
   %{ else }
   - echo "10.0.0.10 cp" >> /etc/hosts
   - kubeadm join --token ${token} --discovery-token-unsafe-skip-ca-verification cp:6443
