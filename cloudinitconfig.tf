@@ -26,10 +26,11 @@ module "tls" {
 module "kubeconfig" {
   source = "./modules/kubeconfig"
 
-  cluster_name     = "terraform"
+  cluster_name     = var.name
+  user_name        = "${var.name}-admin"
+  context_name     = var.name
   cluster_url      = "https://${oci_core_instance.ubuntu_instance[0].public_ip}:6443"
   ca_file          = module.tls.ca_pem
-  user_name        = "terraform"
   client_cert_file = module.tls.client_pem
   client_key_file  = module.tls.client_key
 }

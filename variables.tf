@@ -19,6 +19,11 @@ variable "ssh_public_key" {
 variable "ssh_private_key" {
 }
 
+variable "name" {
+  description = "Name will be used for compartment and kubeconfig"
+  default     = "terraform-oci-free-tier-kubernetes"
+}
+
 variable "instance_shape" {
   description = "Instance Shape"
   default     = "VM.Standard.A1.Flex"
