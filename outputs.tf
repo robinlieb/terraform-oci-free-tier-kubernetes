@@ -65,3 +65,11 @@ output "instance_memory_in_GBs" {
 output "time_created" {
   value = oci_core_instance.ubuntu_instance[*].time_created
 }
+
+output "kubeconfig" {
+  value = module.kubeconfig.kubeconfig
+}
+
+output "kubeconfig_commands" {
+  value = module.kubeconfig.kubeconfig_commands
+}

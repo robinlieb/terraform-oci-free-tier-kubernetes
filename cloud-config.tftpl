@@ -45,6 +45,9 @@ write_files:
       apiVersion: kubeadm.k8s.io/v1beta3
       kind: ClusterConfiguration
       controlPlaneEndpoint: "cp:6443"
+      apiServer:
+        certSANs:
+        - PUBLIC_IP
       networking:
         podSubnet: 192.168.0.0/16
       controllerManager:
@@ -60,6 +63,14 @@ write_files:
       apiVersion: kubelet.config.k8s.io/v1beta1
       kind: KubeletConfiguration
       cgroupDriver: systemd
+  - path: /etc/kubernetes/pki/ca.crt
+    permission: 0600
+    content: |
+      ${indent(6, ca_pem)}
+  - path: /etc/kubernetes/pki/ca.key
+    permission: 0600
+    content: |
+      ${indent(6, ca_key)}
   %{ endif }
 
 runcmd:
@@ -80,6 +91,8 @@ runcmd:
   - echo "10.0.0.11 worker1" >> /etc/hosts
   - echo "10.0.0.12 worker2" >> /etc/hosts
   - echo "10.0.0.13 worker3" >> /etc/hosts
+  - public_ip=$(curl ifconfig.io)
+  - sed -i "s/PUBLIC_IP/$public_ip/g" /etc/kubeadm-config.yaml
   - kubeadm init --config=/etc/kubeadm-config.yaml --upload-certs --ignore-preflight-errors=NumCPU
   - export KUBECONFIG=/etc/kubernetes/admin.conf
   - mkdir -p /home/ubuntu/.kube
