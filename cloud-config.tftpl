@@ -57,7 +57,7 @@ write_files:
       apiVersion: kubeadm.k8s.io/v1beta3
       kind: InitConfiguration
       localAPIEndpoint:
-        advertiseAddress: "10.0.0.10"
+        advertiseAddress: "10.0.10.10"
         bindPort: 6443
       ---
       apiVersion: kubelet.config.k8s.io/v1beta1
@@ -87,10 +87,10 @@ runcmd:
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
   - systemctl restart containerd
   %{if node == 0 }
-  - echo "10.0.0.10 cp" >> /etc/hosts
-  - echo "10.0.0.11 worker1" >> /etc/hosts
-  - echo "10.0.0.12 worker2" >> /etc/hosts
-  - echo "10.0.0.13 worker3" >> /etc/hosts
+  - echo "10.0.10.10 cp" >> /etc/hosts
+  - echo "10.0.20.11 worker1" >> /etc/hosts
+  - echo "10.0.20.12 worker2" >> /etc/hosts
+  - echo "10.0.20.13 worker3" >> /etc/hosts
   - public_ip=$(curl ifconfig.io)
   - sed -i "s/PUBLIC_IP/$public_ip/g" /etc/kubeadm-config.yaml
   - kubeadm init --config=/etc/kubeadm-config.yaml --upload-certs --ignore-preflight-errors=NumCPU
@@ -99,12 +99,12 @@ runcmd:
   - cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
   - chown $(id -u ubuntu):$(id -g ubuntu) /home/ubuntu/.kube/config
   - kubeadm token create ${token}
-  - curl https://docs.projectcalico.org/manifests/calico.yaml -O
+  - curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico-policy-only.yaml -o calico.yaml
   - kubectl apply -f calico.yaml
   - kubectl create secret generic oci-cloud-controller-manager -n kube-system --from-file=cloud-provider.yaml=/tmp/provider-config-template.yaml
   - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager-rbac.yaml
   - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager.yaml
   %{ else }
-  - echo "10.0.0.10 cp" >> /etc/hosts
+  - echo "10.0.10.10 cp" >> /etc/hosts
   - kubeadm join --token ${token} --discovery-token-unsafe-skip-ca-verification cp:6443
   %{ endif }

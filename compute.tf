@@ -17,8 +17,8 @@ resource "oci_core_instance" "ubuntu_instance" {
   display_name = "node${count.index}"
   create_vnic_details {
     assign_public_ip = true
-    subnet_id        = oci_core_subnet.vcn_public_subnet.id
-    private_ip       = "10.0.0.${10 + count.index}"
+    subnet_id        = count.index == 0 ? oci_core_subnet.vcn_controlplane_subnet.id : oci_core_subnet.vcn_worker_subnet.id
+    private_ip = count.index == 0 ? "10.0.10.${10 + count.index}" : "10.0.20.${10 + count.index}"
   }
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
@@ -52,10 +52,8 @@ resource "oci_core_instance" "ubuntu_instance" {
         fingerprint   = var.fingerprint,
         compartment   = oci_identity_compartment.terraform_compartment.id,
         vcn           = module.vcn.vcn_id,
-        subnet1       = oci_core_subnet.vcn_public_subnet.id,
-        subnet2       = oci_core_subnet.vcn_private_subnet.id,
-        securitylist1 = oci_core_security_list.public_security_list.id,
-        securitylist2 = oci_core_security_list.private_security_list.id,
+        subnet1       = oci_core_subnet.vcn_lb_subnet.id,
+        securitylist1 = oci_core_security_list.lb_sl.id,
       }
     )
     destination = "/tmp/provider-config-template.yaml"

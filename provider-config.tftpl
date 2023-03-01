@@ -26,10 +26,6 @@ loadBalancer:
   # OCI load balancers require two subnets to ensure high availability.
   subnet1: ${subnet1}
 
-  # subnet2 configures the second of two subnets to which load balancers will be
-  # added. OCI load balancers require two subnets to ensure high availability.
-  # subnet2: ${subnet2}
-
   # SecurityListManagementMode configures how security lists are managed by the CCM.
   # If you choose to have security lists managed by the CCM, ensure you have setup the following additional OCI policy:
   # Allow dynamic-group [your dynamic group name] to manage security-lists in compartment [your compartment name]
@@ -51,7 +47,6 @@ loadBalancer:
   # Optional specification of which security lists to modify per subnet. This does not apply if security list management is off.
   securityLists:
     ${subnet1}: ${securitylist1}
-    # ${subnet2}: ${securitylist2}
 
 # Optional rate limit controls for accessing OCI API
 rateLimiter:
