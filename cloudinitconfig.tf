@@ -3,7 +3,7 @@ data "cloudinit_config" "config" {
   part {
     content_type = "text/cloud-config"
     filename     = "base.yaml"
-    content = templatefile("${path.module}/cloud-config.tftpl", {
+    content = templatefile("${path.module}/utils/cloud-config.tftpl", {
       node   = count.index,
       token  = module.kubeadm_token.token,
       ca_pem = module.tls.ca_pem,

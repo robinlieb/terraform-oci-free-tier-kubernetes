@@ -34,7 +34,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
 
   provisioner "file" {
-    content = templatefile("${path.module}/scripts/init.sh",
+    content = templatefile("${path.module}/utils/init.sh",
       {
         instanceID = self.id,
       }
@@ -43,7 +43,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
 
   provisioner "file" {
-    content = templatefile("${path.module}/provider-config.tftpl",
+    content = templatefile("${path.module}/utils/provider-config.tftpl",
       {
         region        = var.region,
         tenancy       = var.tenancy_ocid,
