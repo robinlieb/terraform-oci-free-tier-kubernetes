@@ -86,9 +86,11 @@ output "time_created" {
 output "kubeconfig" {
   value       = module.kubeconfig.kubeconfig
   description = "Kubeconfig to access the cluster"
+  sensitive   = true
 }
 
 output "kubeconfig_commands" {
   value       = module.kubeconfig.kubeconfig_commands
   description = "Kubeconfig commands to apply to local kubeconfig"
+  sensitive   = true
 }

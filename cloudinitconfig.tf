@@ -14,7 +14,7 @@ data "cloudinit_config" "config" {
 
 module "kubeadm_token" {
   source  = "robinlieb/kubeadm-token/random"
-  version = "1.0.0"
+  version = "1.1.0"
 }
 
 module "tls" {
