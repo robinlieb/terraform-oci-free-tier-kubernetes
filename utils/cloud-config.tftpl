@@ -37,7 +37,7 @@ write_files:
       net.bridge.bridge-nf-call-ip6tables = 1
       net.bridge.bridge-nf-call-iptables = 1
       net.ipv4.ip_forward = 1
-  %{if node == 0 }
+      %{if node == 0 }
   - path: /etc/kubeadm-config.yaml
     owner: root:root
     permission: 0600
@@ -71,7 +71,7 @@ write_files:
     permission: 0600
     content: |
       ${indent(6, ca_key)}
-  %{ endif }
+      %{ endif }
 
 runcmd:
   - swapoff -a
@@ -86,7 +86,7 @@ runcmd:
   - containerd config default > /etc/containerd/config.toml
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
   - systemctl restart containerd
-  %{if node == 0 }
+    %{if node == 0 }
   - echo "10.0.0.10 cp" >> /etc/hosts
   - echo "10.0.0.11 worker1" >> /etc/hosts
   - echo "10.0.0.12 worker2" >> /etc/hosts
@@ -104,7 +104,7 @@ runcmd:
   - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager-rbac.yaml
   - kubectl apply -f https://github.com/oracle/oci-cloud-controller-manager/releases/latest/download/oci-cloud-controller-manager.yaml
   - until kubectl get nodes | grep -w node3 | grep -q Ready; do sleep 1; done && kubectl label node node3 nginx-ingress=true
-  %{ else }
+    %{ else }
   - echo "10.0.0.10 cp" >> /etc/hosts
   - kubeadm join --token ${token} --discovery-token-unsafe-skip-ca-verification cp:6443
-  %{ endif }
+    %{ endif }
