@@ -43,6 +43,9 @@ To help get started quickly with this Terraform module, I have included an examp
 |------|-------------|
 | <a name="output_all_availability_domains"></a> [all\_availability\_domains](#output\_all\_availability\_domains) | All availaility domains. |
 | <a name="output_available_images"></a> [available\_images](#output\_available\_images) | Available images. |
+| <a name="output_client_certificate"></a> [client\_certificate](#output\_client\_certificate) | Kubernetes Client Certificate |
+| <a name="output_client_key"></a> [client\_key](#output\_client\_key) | Kubernetes Client Key |
+| <a name="output_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#output\_cluster\_ca\_certificate) | Kubernetes Cluster CA Certificate |
 | <a name="output_compartment_id"></a> [compartment\_id](#output\_compartment\_id) | ID of the compartment. |
 | <a name="output_compartment_name"></a> [compartment\_name](#output\_compartment\_name) | Name of the compartment. |
 | <a name="output_instance_OCPUs"></a> [instance\_OCPUs](#output\_instance\_OCPUs) | CPUs of the instances. |

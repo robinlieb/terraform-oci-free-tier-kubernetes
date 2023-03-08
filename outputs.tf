@@ -94,3 +94,21 @@ output "kubeconfig_commands" {
   description = "Kubeconfig commands to apply to local kubeconfig"
   sensitive   = true
 }
+
+output "client_certificate" {
+  value       = module.tls.client_pem
+  description = "Kubernetes Client Certificate"
+  sensitive   = true
+}
+
+output "client_key" {
+  value       = module.tls.client_key
+  description = "Kubernetes Client Key"
+  sensitive   = true
+}
+
+output "cluster_ca_certificate" {
+  value       = module.tls.ca_pem
+  description = "Kubernetes Cluster CA Certificate"
+  sensitive   = true
+}
