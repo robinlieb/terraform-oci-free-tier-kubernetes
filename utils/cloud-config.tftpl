@@ -80,7 +80,6 @@ runcmd:
   - modprobe br_netfilter
   - sysctl --system
   - apt-mark hold kubelet kubeadm kubectl
-  - node_ip=$(ip -o -4 addr list enp0s3 | awk '{print $4}' | cut -d/ -f1)
   - iptables --flush
   - netfilter-persistent save
   - containerd config default > /etc/containerd/config.toml
