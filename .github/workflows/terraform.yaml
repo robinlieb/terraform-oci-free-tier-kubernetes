@@ -1,0 +1,21 @@
+name: Terraform
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Check terraform docs
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        fail-on-diff: true
