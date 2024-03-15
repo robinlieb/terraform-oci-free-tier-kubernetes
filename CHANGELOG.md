@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/v0.1.2...0.2.0) (2024-03-15)
+
+
+### Features
+
+* add kubeadm config for metrics addresses ([#9](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/9)) ([1e5450e](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/1e5450e07846381c11176d3c665076fa7ae4fdb9))
+
 ## [0.1.2](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/v0.1.1...v0.1.2) (2023-11-08)
 
 
