@@ -48,6 +48,18 @@ write_files:
       apiServer:
         certSANs:
         - PUBLIC_IP
+        extraArgs:
+          authorization-mode: "Node,RBAC"
+      controllerManager:
+        extraArgs:
+          bind-address: "0.0.0.0"
+      scheduler:
+        extraArgs:
+          bind-address: "0.0.0.0"
+      etcd:
+        local:
+          extraArgs:
+            listen-metrics-urls: "0.0.0.0"
       networking:
         podSubnet: 10.244.0.0/16
       controllerManager:
@@ -63,6 +75,10 @@ write_files:
       apiVersion: kubelet.config.k8s.io/v1beta1
       kind: KubeletConfiguration
       cgroupDriver: systemd
+      ---
+      apiVersion: kubeproxy.config.k8s.io/v1alpha1
+      kind: KubeProxyConfiguration
+      metricsBindAddress: "0.0.0.0:10249"
   - path: /etc/kubernetes/pki/ca.crt
     permission: 0600
     content: |
