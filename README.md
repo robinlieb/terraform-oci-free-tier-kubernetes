@@ -22,6 +22,7 @@ To help get started quickly with this Terraform module, I have included an examp
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_availability_domain"></a> [availability\_domain](#input\_availability\_domain) | The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1. | `string` | n/a | yes |
 | <a name="input_fingerprint"></a> [fingerprint](#input\_fingerprint) | The fingerprint of the private\_key, e.g. 8c:bf:17:7b:5f:e0:7d:13:75:11:d6:39:0d:e2:84:74. | `string` | n/a | yes |
 | <a name="input_private_key"></a> [private\_key](#input\_private\_key) | The private key retrieved from the Oracle account. | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The desired region of the cluster, e.g. us-phoenix-1. | `string` | n/a | yes |
