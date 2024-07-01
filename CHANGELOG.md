@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.2.0...0.3.0) (2024-07-01)
+
+
+### Features
+
+* add variable for availability domain ([#16](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/16)) ([0e974a0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/0e974a039bbc1342863a310e957593a1dae90e1b))
+
 ## [0.2.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/v0.1.2...0.2.0) (2024-03-30)
 
 
