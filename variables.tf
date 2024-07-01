@@ -23,6 +23,11 @@ variable "region" {
   type        = string
 }
 
+variable "availability_domain" {
+  description = "The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1."
+  type = string
+}
+
 variable "ssh_public_key" {
   description = "The public key used for SSH to the instances."
   type        = string
