@@ -26,6 +26,7 @@ variable "region" {
 variable "availability_domain" {
   description = "The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1."
   type = string
+  default = null
 }
 
 variable "ssh_public_key" {
