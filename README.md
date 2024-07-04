@@ -22,7 +22,6 @@ To help get started quickly with this Terraform module, I have included an examp
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_availability_domain"></a> [availability\_domain](#input\_availability\_domain) | The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1. | `string` | n/a | yes |
 | <a name="input_fingerprint"></a> [fingerprint](#input\_fingerprint) | The fingerprint of the private\_key, e.g. 8c:bf:17:7b:5f:e0:7d:13:75:11:d6:39:0d:e2:84:74. | `string` | n/a | yes |
 | <a name="input_private_key"></a> [private\_key](#input\_private\_key) | The private key retrieved from the Oracle account. | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The desired region of the cluster, e.g. us-phoenix-1. | `string` | n/a | yes |
@@ -30,6 +29,7 @@ To help get started quickly with this Terraform module, I have included an examp
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | The public key used for SSH to the instances. | `string` | n/a | yes |
 | <a name="input_tenancy_ocid"></a> [tenancy\_ocid](#input\_tenancy\_ocid) | The OCID of the tenany, e.g. ocid1.tenancy.oc1..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. | `string` | n/a | yes |
 | <a name="input_user_ocid"></a> [user\_ocid](#input\_user\_ocid) | The OCID of the user, e.g. ocid1.user.oc1..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. | `string` | n/a | yes |
+| <a name="input_availability_domain"></a> [availability\_domain](#input\_availability\_domain) | The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1. | `string` | `null` | no |
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances which should be created. | `number` | `4` | no |
 | <a name="input_instance_memory"></a> [instance\_memory](#input\_instance\_memory) | Amount of memory available to the instance, in gigabytes. | `number` | `6` | no |
 | <a name="input_instance_ocpus"></a> [instance\_ocpus](#input\_instance\_ocpus) | Number of OCPUs available to the instance. | `number` | `1` | no |
