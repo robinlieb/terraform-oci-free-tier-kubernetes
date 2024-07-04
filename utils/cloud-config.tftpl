@@ -59,7 +59,7 @@ write_files:
       etcd:
         local:
           extraArgs:
-            listen-metrics-urls: "0.0.0.0"
+            listen-metrics-urls: "http://0.0.0.0:2381"
       networking:
         podSubnet: 10.244.0.0/16
       controllerManager:
