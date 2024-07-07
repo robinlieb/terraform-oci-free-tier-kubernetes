@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.2.0...0.3.0) (2024-07-07)
+
+
+### Features
+
+* add default to availability domain variable ([#18](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/18)) ([f689bb2](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/f689bb214385b3c93cc8901508f7cbd47af9510d))
+* add variable for availability domain ([#16](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/16)) ([0e974a0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/0e974a039bbc1342863a310e957593a1dae90e1b))
+* update apt sources ([#19](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/19)) ([640beed](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/640beed655184fba52d2cfb8a3e663dbb3683ebd))
+
+
+### Bug Fixes
+
+* etcd listen metrics url ([#20](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/20)) ([eef34bc](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/eef34bc07b6ecba09c102054f9667dacc32d1635))
+* remove duplicate base64 encoding from kubeconfig ([#21](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/21)) ([bb188ee](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/bb188ee5153b7f1a138051419681f361ba1509cb))
+
 ## [0.2.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/v0.1.2...0.2.0) (2024-03-30)
 
 
