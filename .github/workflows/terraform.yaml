@@ -16,6 +16,6 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Check terraform docs
-      uses: terraform-docs/gh-actions@v1.2.2
+      uses: terraform-docs/gh-actions@v1.3.0
       with:
         fail-on-diff: true
