@@ -30,6 +30,12 @@ packages:
   - kubectl
 
 write_files:
+  - path: /etc/multipath.conf
+    append: true
+    content: |
+      blacklist {
+          devnode "^sd[a-z0-9]+"
+      }
   - path: /etc/sysctl.d/kubernetes.conf
     owner: root:root
     permission: 0600
@@ -101,6 +107,7 @@ runcmd:
   - containerd config default > /etc/containerd/config.toml
   - sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
   - systemctl restart containerd
+  - systemctl restart multipathd.service
     %{if node == 0 }
   - echo "10.0.0.10 cp" >> /etc/hosts
   - echo "10.0.0.11 worker1" >> /etc/hosts
