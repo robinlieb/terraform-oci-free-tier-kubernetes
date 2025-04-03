@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.3.0...0.3.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* links to oci-cloud-controller-manager manifests ([#26](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/26)) ([eda82a2](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/eda82a2fb8d8fae4e5dd4b8276e445e0dcfbefbe))
+
 ## [0.3.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.2.0...0.3.0) (2025-03-08)
 
 
