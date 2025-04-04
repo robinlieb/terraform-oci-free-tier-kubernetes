@@ -35,7 +35,7 @@ To help get started quickly with this Terraform module, I have included an examp
 | <a name="input_instance_ocpus"></a> [instance\_ocpus](#input\_instance\_ocpus) | Number of OCPUs available to the instance. | `number` | `1` | no |
 | <a name="input_instance_os"></a> [instance\_os](#input\_instance\_os) | Operating system for compute instances. | `string` | `"Canonical Ubuntu"` | no |
 | <a name="input_instance_shape"></a> [instance\_shape](#input\_instance\_shape) | Shape of the instances. | `string` | `"VM.Standard.A1.Flex"` | no |
-| <a name="input_linux_os_version"></a> [linux\_os\_version](#input\_linux\_os\_version) | Operating system version for all Linux instances. | `string` | `"22.04"` | no |
+| <a name="input_linux_os_version"></a> [linux\_os\_version](#input\_linux\_os\_version) | Operating system version for all Linux instances. | `string` | `"24.04"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name will be used for compartment and kubeconfig. | `string` | `"terraform-oci-free-tier-kubernetes"` | no |
 
 ## Outputs
