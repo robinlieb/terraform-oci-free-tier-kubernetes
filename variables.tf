@@ -25,8 +25,8 @@ variable "region" {
 
 variable "availability_domain" {
   description = "The availability domain in which the instance should be created, e.g Uocm:PHX-AD-1."
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "ssh_public_key" {
@@ -56,7 +56,7 @@ variable "instance_os" {
 
 variable "linux_os_version" {
   description = "Operating system version for all Linux instances."
-  default     = "22.04"
+  default     = "24.04"
 }
 
 variable "instance_ocpus" {
