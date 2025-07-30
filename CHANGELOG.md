@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.0](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.3.1...0.4.0) (2025-07-30)
+
+
+### Features
+
+* add signing keys for apt in cloud init ([#32](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/32)) ([0ce7ce8](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/0ce7ce880adcb523cfd09299b26422a58101a952))
+* set kubernetes package source to 1.31 ([#30](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/30)) ([5a53251](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/5a53251bbddee1c41045663c4bb9d40bccf0fc0c))
+* set linux_os_version default to 24.04 ([#28](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/issues/28)) ([b540158](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/commit/b5401580efa1be5bcc19af6908d7fdc4342eaf89))
+
 ## [0.3.1](https://github.com/robinlieb/terraform-oci-free-tier-kubernetes/compare/0.3.0...0.3.1) (2025-04-03)
 
 
