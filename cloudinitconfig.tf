@@ -4,10 +4,12 @@ data "cloudinit_config" "config" {
     content_type = "text/cloud-config"
     filename     = "base.yaml"
     content = templatefile("${path.module}/utils/cloud-config.tftpl", {
-      node   = count.index,
-      token  = module.kubeadm_token.token,
-      ca_pem = module.tls.ca_pem,
-      ca_key = module.tls.ca_key
+      node                   = count.index,
+      token                  = module.kubeadm_token.token,
+      ca_pem                 = module.tls.ca_pem,
+      ca_key                 = module.tls.ca_key,
+      kubernetes_signing_key = data.http.kubernetes_signing_key.response_body
+      docker_signing_key     = data.http.docker_signing_key.response_body
     })
   }
 }

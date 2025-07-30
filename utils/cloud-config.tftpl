@@ -5,14 +5,15 @@ package_upgrade: true
 
 apt:
   preserve_sources_list: false
-  add_apt_repo_match: ^[\w-]+:\w
   sources:
     kubernetes.list:
-      source: "deb https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /"
-      keyid: DE15B14486CD377B9E876E1A234654DA9A296436
+      source: "deb [signed-by=$KEY_FILE] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /"
+      key: |
+        ${indent(8, kubernetes_signing_key)}
     docker.list:
-      source: "deb [arch=arm64] https://download.docker.com/linux/ubuntu jammy stable"
-      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+      source: "deb [signed-by=$KEY_FILE arch=arm64] https://download.docker.com/linux/ubuntu $RELEASE stable"
+      key: |
+        ${indent(8, docker_signing_key)}
 
 packages:
   - curl
