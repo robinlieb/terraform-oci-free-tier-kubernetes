@@ -14,10 +14,13 @@ variable "cluster_url" {
 }
 
 variable "ca_file" {
+  sensitive = true
 }
 
 variable "client_cert_file" {
+  sensitive = true
 }
 
 variable "client_key_file" {
+  sensitive = true
 }

@@ -1,5 +1,5 @@
 output "all_availability_domains" {
-  value       = data.oci_identity_availability_domains.ads.availability_domains
+  value       = module.compute.all_availability_domains
   description = "All availaility domains."
 }
 
@@ -13,73 +13,73 @@ output "compartment_id" {
   description = "ID of the compartment."
 }
 
-output "vcp_id" {
-  value       = module.vcn.vcn_id
+output "vcn_id" {
+  value       = module.network.vcn.vcn_id
   description = "ID of the VCN."
 }
 
 output "vcn_id_route_id" {
-  value       = module.vcn.ig_route_id
+  value       = module.network.vcn.ig_route_id
   description = "ID of the route."
 }
 
 output "vcn_nat_gateway_id" {
-  value       = module.vcn.nat_gateway_id
+  value       = module.network.vcn.nat_gateway_id
   description = "ID of the NAT gateway."
 }
 
 output "vcn_nat_route_id" {
-  value       = module.vcn.nat_route_id
+  value       = module.network.vcn.nat_route_id
   description = "ID of the NAT route."
 }
 
 output "available_images" {
-  value       = data.oci_core_images.instance_images.images
+  value       = module.compute.available_images
   description = "Available images."
 }
 
 output "public_ip_for_compute_instance" {
-  value       = oci_core_instance.ubuntu_instance[*].public_ip
+  value       = module.compute.instances[*].public_ip
   description = "Public IPs of the instances."
 }
 
 output "instance_name" {
-  value       = oci_core_instance.ubuntu_instance[*].display_name
+  value       = module.compute.instances[*].display_name
   description = "Names of the instances."
 }
 
 output "instance_ocid" {
-  value       = oci_core_instance.ubuntu_instance[*].id
+  value       = module.compute.instances[*].id
   description = "OCID of the instances."
 }
 
 output "instance_region" {
-  value       = oci_core_instance.ubuntu_instance[*].region
+  value       = module.compute.instances[*].region
   description = "Region of the instances."
 }
 
 output "instance_shape" {
-  value       = oci_core_instance.ubuntu_instance[*].shape
+  value       = module.compute.instances[*].shape
   description = "Shape of the instances."
 }
 
 output "instance_state" {
-  value       = oci_core_instance.ubuntu_instance[*].state
+  value       = module.compute.instances[*].state
   description = "State of the instances."
 }
 
 output "instance_OCPUs" {
-  value       = oci_core_instance.ubuntu_instance[*].shape_config[0].ocpus
+  value       = module.compute.instances[*].shape_config[0].ocpus
   description = "CPUs of the instances."
 }
 
 output "instance_memory_in_GBs" {
-  value       = oci_core_instance.ubuntu_instance[*].shape_config[0].memory_in_gbs
+  value       = module.compute.instances[*].shape_config[0].memory_in_gbs
   description = "Memory in GB of the instances."
 }
 
 output "time_created" {
-  value       = oci_core_instance.ubuntu_instance[*].time_created
+  value       = module.compute.instances[*].time_created
   description = "Creation time of the instances"
 }
 

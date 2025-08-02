@@ -42,11 +42,6 @@ variable "ssh_private_key" {
   sensitive   = true
 }
 
-variable "name" {
-  description = "Name will be used for compartment and kubeconfig."
-  default     = "terraform-oci-free-tier-kubernetes"
-}
-
 variable "instance_shape" {
   description = "Shape of the instances."
   default     = "VM.Standard.A1.Flex"
@@ -75,4 +70,35 @@ variable "instance_memory" {
 variable "instance_count" {
   description = "Number of instances which should be created."
   default     = 4
+}
+
+variable "compartment_id" {
+  description = "The OCID of the compartment where resources will be created."
+}
+
+variable "kubeadm_token" {
+  description = "Bootstrap token used by kubeadm to join nodes to the Kubernetes cluster."
+  sensitive   = true
+}
+
+variable "ca_pem" {
+  description = "PEM-encoded certificate authority data used for cluster node authentication."
+  sensitive   = true
+}
+
+variable "ca_key" {
+  description = "Private key associated with the certificate authority used for Kubernetes."
+  sensitive   = true
+}
+
+variable "vcn_id" {
+  description = "The OCID of the Virtual Cloud Network (VCN) where the instances will be deployed."
+}
+
+variable "subnet_id" {
+  description = "The OCID of the subnet within the VCN to be used for the instances."
+}
+
+variable "public_security_list_id" {
+  description = "The OCID of the security list to be associated with the public subnet."
 }

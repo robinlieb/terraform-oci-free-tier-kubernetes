@@ -8,6 +8,7 @@ output "kubeconfig_commands" {
     client_cert_file = base64encode(var.client_cert_file),
     client_key_file  = base64encode(var.client_key_file)
   })
+  sensitive = true
 }
 
 output "kubeconfig" {
@@ -20,4 +21,5 @@ output "kubeconfig" {
     client_cert_file = base64encode(var.client_cert_file),
     client_key_file  = base64encode(var.client_key_file)
   })
+  sensitive = true
 }

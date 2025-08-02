@@ -1,7 +1,7 @@
 resource "oci_core_instance" "ubuntu_instance" {
   count               = var.instance_count
   availability_domain = coalesce(var.availability_domain, data.oci_identity_availability_domains.ads.availability_domains[0].name)
-  compartment_id      = oci_identity_compartment.terraform_compartment.id
+  compartment_id      = var.compartment_id
   shape               = var.instance_shape
 
   shape_config {
@@ -17,7 +17,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   display_name = "node${count.index}"
   create_vnic_details {
     assign_public_ip = true
-    subnet_id        = oci_core_subnet.vcn_public_subnet.id
+    subnet_id        = var.subnet_id
     private_ip       = "10.0.0.${10 + count.index}"
   }
   metadata = {
@@ -34,7 +34,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
 
   provisioner "file" {
-    content = templatefile("${path.module}/utils/init.sh",
+    content = templatefile("${path.module}/scripts/init.sh",
       {
         instanceID = self.id,
       }
@@ -43,17 +43,17 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
 
   provisioner "file" {
-    content = templatefile("${path.module}/utils/provider-config.tftpl",
+    content = templatefile("${path.module}/templates/provider-config.tftpl",
       {
         region        = var.region,
         tenancy       = var.tenancy_ocid,
         user          = var.user_ocid,
         key           = var.private_key,
         fingerprint   = var.fingerprint,
-        compartment   = oci_identity_compartment.terraform_compartment.id,
-        vcn           = module.vcn.vcn_id,
-        subnet1       = oci_core_subnet.vcn_public_subnet.id,
-        securitylist1 = oci_core_security_list.public_sl.id,
+        compartment   = var.compartment_id,
+        vcn           = var.vcn_id,
+        subnet1       = var.subnet_id,
+        securitylist1 = var.public_security_list_id,
       }
     )
     destination = "/tmp/provider-config-template.yaml"
@@ -68,11 +68,3 @@ resource "oci_core_instance" "ubuntu_instance" {
 
 }
 
-data "oci_core_images" "instance_images" {
-  compartment_id           = oci_identity_compartment.terraform_compartment.id
-  operating_system         = var.instance_os
-  operating_system_version = var.linux_os_version
-  shape                    = var.instance_shape
-  sort_by                  = "TIMECREATED"
-  sort_order               = "DESC"
-}

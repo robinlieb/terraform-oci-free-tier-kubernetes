@@ -1,5 +1,5 @@
 resource "oci_core_subnet" "vcn_public_subnet" {
-  compartment_id = oci_identity_compartment.terraform_compartment.id
+  compartment_id = var.compartment_id
   vcn_id         = module.vcn.vcn_id
   cidr_block     = "10.0.0.0/24"
 

@@ -1,5 +1,5 @@
 resource "oci_core_security_list" "public_sl" {
-  compartment_id = oci_identity_compartment.terraform_compartment.id
+  compartment_id = var.compartment_id
   vcn_id         = module.vcn.vcn_id
 
   display_name = "public-sl"

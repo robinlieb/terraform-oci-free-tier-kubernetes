@@ -2,7 +2,7 @@ module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
   version = "3.6.0"
 
-  compartment_id               = oci_identity_compartment.terraform_compartment.id
+  compartment_id               = var.compartment_id
   region                       = var.region
   internet_gateway_route_rules = null
   local_peering_gateways       = null
